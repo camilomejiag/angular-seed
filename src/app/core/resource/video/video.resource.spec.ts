@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import {VideoResource} from './video.service';
+import {VideoResource} from './video.resource';
 
 describe('VideoResource', () => {
   beforeEach(() => {

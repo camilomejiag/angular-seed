@@ -1,0 +1,9 @@
+<nav>
+  <ul>
+    <li><a uiSref="/">Home</a></li>
+    <li>Categories</li>
+    <ul *ngFor="let category of categories">
+      <li ><a  uiSref="home.dashboard" [uiParams]="{category: category?.uri}">{{category?.name}}</a></li>
+    </ul>
+  </ul>
+</nav>

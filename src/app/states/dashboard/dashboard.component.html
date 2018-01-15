@@ -1,3 +1,8 @@
-<p>
-  dashboard works!
-</p>
+<div>
+  <ul *ngFor="let video of Videos">
+    <li>
+      <a uiSref="home.video" [uiParams]="{ id: video.uri}">{{video.title}}</a><br>
+      <!--<img src="https://api.vimeo.com{{video?.picture}}&{{ImageHeader}}" >-->
+    </li>
+  </ul>
+</div>

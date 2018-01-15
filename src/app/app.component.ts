@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {VideoService} from './core/service/video/video.service';
+import {CategoryService} from './core/service/category/category.service';
+import {Category} from './core/model/category.model';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,17 @@ import {VideoService} from './core/service/video/video.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public _VideoService: VideoService) {
+  constructor() {
 
   }
 
-  ngOnInit(): void {
-    this._VideoService.getStories();
+  ngOnInit() {
+    // this.categoryService.getCategories().subscribe((e: Category[]) =>
+    //   this.videoService.getVideosByCategory(e[0]).subscribe(d =>
+    //     this.videoService.getRelatedVideos(d[0]).subscribe(f => console.log(f))
+    //   ));
+     // this.videoService.getVideo();
+    // this.videoService.getVideoComments();
+    // this.videoService.getRelatedVideos('videos/47513706');
   }
 }
