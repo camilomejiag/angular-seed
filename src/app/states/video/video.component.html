@@ -1,7 +1,22 @@
-<a uiSref="home.dashboard">Back</a><br>
-<div [innerHTML]="video.link"></div>
-Title: {{video.title}} <br>
-Owner: {{video.owner}} <br>
-Created date: {{video.createdDate}} <br>
-Description: {{video.description}}
-
+<div class="video">
+  <h2><a uiSref="home.dashboard">Back</a><br></h2>
+  <div class="row">
+    <div class="video-frame" [innerHTML]="video.link"></div>
+  </div>
+  <div class="row">
+    <h2 class="col-6">Title:</h2>
+    <p class="col-6">{{video.title}}</p>
+  </div>
+  <div class="row">
+    <h2 class="col-6">Owner:</h2>
+    <p class="col-6">{{video.owner}}</p>
+  </div>
+  <div class="row">
+    <h2 class="col-6">Created date:</h2>
+    <p class="col-6">{{video.createDate}}</p>
+  </div>
+  <div class="row">
+    <h2 class="col-6">Description:</h2>
+    <p class="col-6">{{video.description}}</p>
+  </div>
+</div>

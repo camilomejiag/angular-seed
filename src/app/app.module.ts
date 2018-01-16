@@ -13,9 +13,9 @@ import {LoginComponent} from './states/login/login.component';
 import {RegisterComponent} from './states/register/register.component';
 import {VideoComponent} from './states/video/video.component';
 import {SafePipe} from './commons/pipe/safe-pipe';
-import {FormsModule} from "@angular/forms";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {SidebarComponent} from "./commons/components/sidebar/sidebar.component";
+import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SidebarComponent} from './commons/components/sidebar/sidebar.component';
 
 
 @NgModule({

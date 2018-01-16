@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this._userService.registerUser(this.user).subscribe((user: User) => {
       this._userService.getUser(user).subscribe(() => {
-        this._stateService.go('home.dashboard', {category: '/categories/animation'});
+        this._stateService.go('home.dashboard', {category: 'animation'});
       });
     });
 

@@ -9,12 +9,12 @@ import {Video} from '../../core/model/video.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  @Input() Videos: Video[];
+  @Input() videos: Video[];
 
   constructor(public videoService: VideoService, public categoryService: CategoryService) {
   }
 
   ngOnInit() {
-
+console.log(this.videos);
   }
 }

@@ -18,9 +18,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this._userService.getUser(this.user)) {
-      this._stateService.go('home.dashboard', {category: '/categories/animation'});
-    }
+    this._userService.getUser(this.user).subscribe(() => {
+      alert('Logged in successfully!');
+      this._stateService.go('home.dashboard');
+    }, error => {
+      alert(error);
+    });
   }
 
 }

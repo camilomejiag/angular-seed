@@ -5,7 +5,14 @@ import {Transition} from "@uirouter/angular/lib";
 export const state = {
   name: 'home.video',
   url: '/video/:id',
-  component: VideoComponent,
+  data: {
+    authorization: 'logged'
+  },
+  views: {
+    'content@': {
+      component: VideoComponent
+    }
+  },
   resolve: [
     {
       token: 'video',

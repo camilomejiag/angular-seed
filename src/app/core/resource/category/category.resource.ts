@@ -15,9 +15,13 @@ export class CategoryResource {
     return this.http.get(`${VimeoConstants.vimeoUrl}/categories`).map((response: any) => {
       const categories: Category[] = [];
       response.data.forEach(item => {
-        categories.push(new Category(item.uri, item.name, item.link));
+        categories.push(this.dtoToModel(item));
       });
       return categories;
     });
+  }
+
+  private dtoToModel (dto: any): Category {
+    return new Category(dto.uri.substr(dto.uri.lastIndexOf('/') + 1, dto.uri.length), dto.name, dto.link);
   }
 }

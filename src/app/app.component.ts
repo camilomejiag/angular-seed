@@ -15,12 +15,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.categoryService.getCategories().subscribe((e: Category[]) =>
-    //   this.videoService.getVideosByCategory(e[0]).subscribe(d =>
-    //     this.videoService.getRelatedVideos(d[0]).subscribe(f => console.log(f))
-    //   ));
-     // this.videoService.getVideo();
-    // this.videoService.getVideoComments();
-    // this.videoService.getRelatedVideos('videos/47513706');
   }
 }

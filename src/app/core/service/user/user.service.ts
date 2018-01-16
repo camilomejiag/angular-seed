@@ -11,15 +11,18 @@ export class UserService {
 
   public getUser(user: User): Observable<User> {
     return this.userResource.getUser(user);
-    // const storageUser = this.userResource.getUser();
-    // if (storageUser.email === user.email && storageUser.password === user.password) {
-    //   return true;
-    // }
-    // return false;
   }
 
   public registerUser(user: User): Observable<User> {
     return this.userResource.registerUser(user);
+  }
+
+  public checkAuthenticated(): Observable<User> {
+    return this.userResource.checkAuthenticated();
+  }
+
+  public logoutUser(): Observable<any> {
+    return this.userResource.logoutUser();
   }
 
 }

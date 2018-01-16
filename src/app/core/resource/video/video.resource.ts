@@ -13,20 +13,25 @@ export class VideoResource {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
 
+  public uriFactory(uri) {
+    return uri.substr(uri.lastIndexOf('/') + 1, uri.length);
+  }
+
   public getVideosByCategory(category): Observable<Video[]> {
-    return this.http.get(`${VimeoConstants.vimeoUrl}${category}/videos`).map((response: any) => {
+    console.log(category)
+    return this.http.get(`${VimeoConstants.vimeoUrl}/categories/${category}/videos`).map((response: any) => {
       const video: Video[] = [];
       response.data.forEach(item => {
-        video.push(new Video(item.user.name, item.pictures.uri, this.sanitizer.bypassSecurityTrustHtml(item.embed.html), item.created_time, item.description, item.name, item.uri));
+        video.push(this.dtoToModel(item));
       });
       return video;
     });
   }
 
   public getVideoById(videoId: number): Observable<Video> {
-    return this.http.get(`${VimeoConstants.vimeoUrl}${videoId}`).map((response: any) => {
+    return this.http.get(`${VimeoConstants.vimeoUrl}/videos/${videoId}`).map((response: any) => {
       const dto = response;
-      return new Video(dto.user.name, dto.pictures.uri, this.toSafe(dto.embed.html), dto.created_time, dto.description, dto.name, dto.uri);
+      return this.dtoToModel(dto);
     });
   }
 
@@ -41,7 +46,7 @@ export class VideoResource {
     return this.http.get(`${VimeoConstants.vimeoUrl + video.uri}/videos?filter=related`).map((response: any) => {
       const relatedVideos: Video[] = [];
       response.data.forEach(item => {
-        relatedVideos.push(new Video(item.user.name, item.pictures.uri, this.sanitizer.bypassSecurityTrustHtml(item.embed.html), item.created_time, item.description, item.name, item.uri));
+        relatedVideos.push(this.dtoToModel(item));
       });
       return relatedVideos;
     });
@@ -49,5 +54,13 @@ export class VideoResource {
 
   private toSafe(link) {
     return this.sanitizer.bypassSecurityTrustHtml(link);
+  }
+
+  private toSafeImg(link) {
+    return this.sanitizer.bypassSecurityTrustUrl(link);
+  }
+
+  private dtoToModel(dto: any): Video {
+    return new Video(dto.user.name, this.toSafeImg(dto.pictures.sizes[0].link), this.toSafe(dto.embed.html), dto.created_time, dto.description, dto.name, dto.uri.substr(dto.uri.lastIndexOf('/') + 1, dto.uri.length));
   }
 }

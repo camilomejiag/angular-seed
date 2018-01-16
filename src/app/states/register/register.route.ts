@@ -3,5 +3,12 @@ import {RegisterComponent} from './register.component';
 export const state = {
   name: 'register',
   url: '/register',
-  component: RegisterComponent
+  data: {
+    authorization: 'notLogged'
+  },
+  views: {
+    'content@': {
+      component: RegisterComponent
+    }
+  }
 };

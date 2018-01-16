@@ -2,7 +2,7 @@ import {SafeHtml} from '@angular/platform-browser';
 
 export class Video {
 
-  constructor(private _owner: string, private _picture: string, private _link: SafeHtml, private _createDate: string,
+  constructor(private _owner: string, private _picture: SafeHtml, private _link: SafeHtml, private _createDate: string,
               private _description: string, private _title: string, private _uri: string, private _comments?: Comment[]) {
   }
 
@@ -10,7 +10,7 @@ export class Video {
     return this._owner;
   }
 
-  public get picture(): string {
+  public get picture(): SafeHtml {
     return this._picture;
   }
 

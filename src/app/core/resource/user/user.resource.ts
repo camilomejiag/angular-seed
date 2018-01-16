@@ -10,22 +10,48 @@ export class UserResource {
   }
 
   public getUser(user: User): Observable<User> {
-    const email = localStorage.getItem('Email');
-    const password = localStorage.getItem('Password');
-    const firstName = localStorage.getItem('FirstName');
-    const lastName = localStorage.getItem('LastName');
-    const middleName = localStorage.getItem('middleName');
-    const returnUser = new User(email, password, firstName, lastName, middleName);
-    return (Observable.of(returnUser));
+    const users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+    const currentUser: User = user;
+    if (users.length > 0) {
+      for (const actualUser in users) {
+        if (users[actualUser].email === currentUser.email && users[actualUser].password === currentUser.password) {
+          localStorage.setItem('currentUser', JSON.stringify(users[actualUser]));
+          return (Observable.of(users[actualUser]));
+        }
+      }
+      return (Observable.throw(new Error('Email/Password Not Valid')));
+    } else {
+      return (Observable.throw(new Error('User Doesn`t Exist ')));
+    }
+  }
+
+  logoutUser(): Observable<any> {
+    localStorage.removeItem('currentUser');
+    return (Observable.of('Logged out'));
   }
 
   public registerUser(user: User): Observable<User> {
-    localStorage.setItem('Email', user.email);
-    localStorage.setItem('Password', user.password);
-    localStorage.setItem('FirstName', user.firstName);
-    localStorage.setItem('LastName', user.lastName);
-    localStorage.setItem('middleName', user.middleName);
-    return (Observable.of(user));
+    const users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+    const newUser: User = user;
+    let existingUser = false;
+    if (users.length > 0) {
+      for (const actualUser in users) {
+        if (users[actualUser].email === newUser.email) {
+          existingUser = true;
+        }
+      }
+      if (existingUser) {
+        return (Observable.throw(new Error('User Duplicated')));
+      }
+    }
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    return (Observable.of(newUser));
+  }
+
+  public checkAuthenticated(): Observable<User> {
+    const currentUser: User = JSON.parse(localStorage.getItem('currentUser')) || undefined;
+    return (Observable.of(currentUser));
   }
 
 }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
 home {
   display: inline-block;
   float: left;
@@ -17,4 +18,41 @@ app-login {
 
 app-register {
   margin: 10% 20%;
+}
+
+.dashboard {
+  ul {
+    list-style-type: none;
+
+  }
+  li {
+
+    margin-left: 50%;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.sidebar {
+  ul {
+    list-style-type: none;
+    li {
+      font-size: 20px;
+      &:hover {
+        color: #000;
+        background-color: #ccc;
+        text-decoration: none;
+      }
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+ui-view.content {
+  max-height: 100%;
+  overflow-y: scroll;
 }
